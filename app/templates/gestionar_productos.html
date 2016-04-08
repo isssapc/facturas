@@ -1,0 +1,24 @@
+<h1>Gestionar Productos</h1>
+
+<table st-table="ctrl.productos_view" st-safe-src="ctrl.productos" class="table table-striped">
+    <thead>
+        <tr>
+            <th>id_producto</th>
+            <th>dominio</th>
+            <th>descripcion</th>
+            <th>precio_unitario</th>
+            <th>habilitado</th>
+            <th>visible</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="producto in ctrl.productos">
+            <td>{{producto.id_producto}}</td>
+            <td>{{producto.dominio}}</td>
+            <td>{{producto.descripcion}}</td>
+            <td>{{producto.precio_unitario}}</td>
+            <td>{{producto.habilitado}}</td>
+            <td>{{producto.visible}}</td>
+        </tr>
+    </tbody>
+</table>

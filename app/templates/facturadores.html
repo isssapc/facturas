@@ -1,0 +1,25 @@
+<h1>facturadores</h1>
+
+
+<table st-table="ctrl.facturadores_view" st-safe-src="ctrl.facturadores" class="table table-striped">
+    <thead>
+        <tr>
+            <th>id_facturador</th>
+            <th>dominio</th>
+            <th>nombre</th>
+            <th>telefono</th>
+            <th>email</th>
+            <th>ciudad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="facturador in ctrl.facturadores">
+            <td>{{facturador.id_facturador}}</td>
+            <td>{{facturador.dominio}}</td>
+            <td>{{facturador.nombre}}</td>
+            <td>{{facturador.telefono}}</td>
+            <td>{{facturador.email}}</td>
+            <td>{{facturador.ciudad}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,22 @@
+<h1>Usuarios</h1>
+
+<table st-table="ctrl.usuarios_view" st-safe-src="ctrl.usuarios" class="table table-striped">
+    <thead>
+        <tr>
+            <th>id usuario</th>
+            <th>id_rol</th>
+            <th>email</th>
+            <th>password</th>
+            <th>dominio</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="usuario in ctrl.usuarios">
+            <td>{{usuario.id_usuario}}</td>
+            <td>{{usuario.id_rol}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{usuario.password}}</td>
+            <td>{{usuario.dominio}}</td>
+        </tr>
+    </tbody>
+</table>

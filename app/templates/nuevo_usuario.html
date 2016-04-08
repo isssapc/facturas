@@ -1,0 +1,31 @@
+<h1>Nuevo Usuario</h1>
+
+<form ng-submit="ctrl.add_usuario(ctrl.usuario)"> 
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" class="form-control" placeholder="usuario@dominio.com" ng-model="ctrl.usuario.email" >
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Password" ng-model="ctrl.usuario.password" >
+    </div>
+
+
+
+
+
+    <div class="form-group">
+        <label for="impuesto">Impuesto</label>
+        <select id="impuesto" class="form-control">
+            <option value="">Seleccionar...</option>
+        </select>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox"> Asignar??
+        </label>
+    </div>
+    <button type="submit" class="btn btn-default">Guardar</button>
+</form>
+<div>{{ctrl.usuario|json}}</div>

@@ -1,0 +1,25 @@
+<h1>Configuración Datos</h1>
+
+
+<table st-table="ctrl.pagos_view" st-safe-src="ctrl.pagos" class="table table-striped">
+    <thead>
+        <tr>
+            <th>id_pago</th>
+            <th>id_factura</th>
+            <th>cantidad</th>
+            <th>dominio</th>
+            <th>fecha</th>
+            <th>notas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="pago in ctrl.pagos">
+            <td>{{pago.id_pago}}</td>
+            <td>{{pago.id_factura}}</td>
+            <td>{{pago.cantidad}}</td>
+            <td>{{pago.dominio}}</td>
+            <td>{{pago.fecha}}</td>
+            <td>{{pago.notas}}</td>
+        </tr>
+    </tbody>
+</table>

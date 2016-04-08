@@ -1,0 +1,130 @@
+<h1>Nueva Factura</h1>
+
+<form class="" ng-submit="ctrl.addFactura(ctrl.factura, ctrl.factura_productos)">
+
+    <div class="form-group">
+        <label for="facturador">Facturador</label>
+        <select id="facturador" class="form-control" ng-model="ctrl.factura.id_facturador">
+            <option value="">Seleccionar...</option>
+            <option ng-repeat="facturador in ctrl.facturadores" value="{{facturador.id_facturador}}">{{facturador.nombre}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="cliente">Cliente</label>
+        <select id="cliente" class="form-control" ng-model="ctrl.factura.id_cliente">
+            <option value="">Seleccionar...</option>
+            <option ng-repeat="cliente in ctrl.clientes" value="{{cliente.id_cliente}}">{{cliente.nombre}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input type="text" id="fecha" class="form-control" placeholder="aaa-mm-dd" ng-model="ctrl.factura.fecha" >
+    </div>
+
+    <div class="well">
+        <div class="row">
+            <div class="col-md-1 lr">
+                <input type="number" class="form-control" ng-model="ctrl.cantidad">
+            </div>
+            <div class="col-md-5 lr">
+                <select class="form-control" ng-options="producto.descripcion for producto in ctrl.productos" ng-model="ctrl.producto">
+                    <option value="">Seleccionar Producto...</option>                       
+                </select>
+            </div>
+            <div class="col-md-2 lr">
+                <select class="form-control" ng-model="ctrl.producto.impuesto" 
+                        ng-options="impuesto as impuesto.descripcion for impuesto in ctrl.impuestos track by impuesto.id_impuesto">
+                    <!--<option value="">Seleccionar Impuesto...</option>-->                       
+                </select>
+            </div>
+            <div class="col-md-1 lr">
+                <input type="text" class="form-control" ng-model="ctrl.producto.impuesto.tasa" readonly>
+            </div>
+            <div class="col-md-2 lr">
+                <input type="text" class="form-control" placeholder="Precio" ng-model="ctrl.producto.precio_unitario" readonly>
+            </div>
+            <div class="col-md-1 lr">
+                <button type="button" ng-click="ctrl.addProducto2(ctrl.producto, ctrl.cantidad)" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Productos</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row lr" ng-repeat="producto in ctrl.factura_productos">
+                <div class="col-md-1 lr">
+                    <input type="number" class="form-control" ng-model="producto.cantidad">
+                </div>
+                <div class="col-md-5 lr">
+                    <input type="text" class="form-control" ng-model="producto.descripcion">
+                </div>
+                <div class="col-md-2 lr">
+                    <select class="form-control" ng-model="producto.impuesto" 
+                            ng-options="impuesto as impuesto.descripcion for impuesto in ctrl.impuestos track by impuesto.id_impuesto">
+                        <!--<option value="">Seleccionar Impuesto...</option>-->                       
+                    </select>
+                </div>
+                <div class="col-md-1 lr">
+                    <input type="text" class="form-control" ng-model="producto.impuesto.tasa" readonly>
+                </div>
+                <div class="col-md-2 lr">
+                    <input type="text" class="form-control" placeholder="Precio" ng-model="producto.precio_unitario">
+                </div>
+                <div class="col-md-1 lr">
+                    <button type="button" ng-disabled="ctrl.factura_productos.length == 1" ng-click="ctrl.delProducto(producto)" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Importe Bruto</label>
+        <p class="form-control-static">{{ ctrl.bruto(ctrl.factura_productos)}}</p>
+        <!--        <input type="text" class="form-control"   value="{{ ctrl.bruto(ctrl.factura_productos)}}" >-->
+    </div>
+
+    <div class="form-group" ng-repeat="impuesto in ctrl.distinctImpuestos(ctrl.factura_productos)">
+        <label>{{impuesto.descripcion}}</label>
+        <p class="form-control-static">{{impuesto.total}}</p>        
+    </div>
+
+    <div class="form-group">
+        <label>Total Factura</label>
+        <p class="form-control-static">{{ ctrl.total(ctrl.factura_productos)}}</p>
+        <!--<input type="text" class="form-control"   value="{{ ctrl.total(ctrl.factura_productos)}}" >-->
+    </div>
+
+    <div class="form-group">
+        <select class="form-control" ng-model="ctrl.factura.id_preferencia">
+            <option value="">Seleccionar Prefencia...</option>
+            <option ng-repeat="p in ctrl.preferencias" value="{{p.id_preferencia}}">{{p.descripcion}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="notas">Nota</label>
+        <textarea  id="notas" class="form-control" placeholder="" ng-model="ctrl.factura.nota"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+
+<div>Factura:{{ctrl.factura|json}}</div>
+<div>Producto{{ctrl.producto|json}}</div>
+<div>Productos:{{ctrl.factura_productos|json}}</div>
+
+<script>
+    $('#fecha').datepicker({
+        todayBtn: "linked",
+        language: "es",
+        orientation: "bottom auto",
+        todayHighlight: true,
+        format: "yyyy-mm-dd",
+        autoclose: true
+    });
+</script>

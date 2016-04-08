@@ -1,0 +1,73 @@
+/* app css stylesheet */
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+.red{
+    color:red;
+}
+
+.lr{
+    margin-bottom: 5px;
+}
+
+/*.lrr{
+    margin-bottom: 5px;
+}*/
+
+
+/*.sortable{
+    cursor: pointer;
+}*/
+
+th[st-sort]{
+    cursor:pointer;
+}
+
+th[st-sort]:after{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e150";
+}
+.st-sort-ascent:after{  
+    content: "\e151"!important;
+}
+
+.st-sort-descent:after{  
+    content: "\e152"!important;
+}

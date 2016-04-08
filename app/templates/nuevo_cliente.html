@@ -1,0 +1,66 @@
+<h1>Nuevo Cliente</h1>
+
+<form ng-submit="ctrl.add_cliente(ctrl.cliente)">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" class="form-control" placeholder="Nombre" ng-model="ctrl.cliente.nombre" >
+    </div>
+    <div class="form-group">
+        <label for="contacto">Contacto</label>
+        <input type="text" id="contacto" class="form-control" placeholder="Contacto" ng-model="ctrl.cliente.contacto" >
+    </div>
+    <div class="form-group">
+        <label for="calle">Calle</label>
+        <input type="text" id="calle" class="form-control" placeholder="Calle" ng-model="ctrl.cliente.calle" >
+    </div>
+     <div class="form-group">
+        <label for="ciudad">Ciudad</label>
+        <input type="text" id="ciudad" class="form-control" placeholder="Ciudad" ng-model="ctrl.cliente.ciudad" >
+    </div>
+     <div class="form-group">
+        <label for="estado">Estado</label>
+        <input type="text" id="estado" class="form-control" placeholder="Estado" ng-model="ctrl.cliente.estado" >
+    </div>
+     <div class="form-group">
+        <label for="costo">Código Postal</label>
+        <input type="text" id="costo" class="form-control" placeholder="C.P." ng-model="ctrl.cliente.cp" >
+    </div>
+     <div class="form-group">
+        <label for="cp">País</label>
+        <input type="text" id="cp" class="form-control" placeholder="País" ng-model="ctrl.cliente.pais" >
+    </div>
+     <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="text" id="telefono" class="form-control" placeholder="Teléfono" ng-model="ctrl.cliente.telefono" >
+    </div>
+     <div class="form-group">
+        <label for="celular">Celular</label>
+        <input type="text" id="celular" class="form-control" placeholder="Celular" ng-model="ctrl.cliente.celular" >
+    </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" class="form-control" placeholder="usuario@dominio.com" ng-model="ctrl.cliente.email" >
+    </div>
+      <div class="form-group">
+        <label for="notas">Notas</label>
+        <input type="text" id="notas" class="form-control" placeholder="Notas" ng-model="ctrl.cliente.notas" >
+    </div>
+    
+    
+    
+    
+    
+    <div class="form-group">
+        <label for="impuesto">Impuesto</label>
+        <select id="impuesto" class="form-control">
+            <option value="">Seleccionar...</option>
+        </select>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox"> Asignar??
+        </label>
+    </div>
+    <button type="submit" class="btn btn-default">Guardar</button>
+</form>
+<div>{{ctrl.cliente|json}}</div>

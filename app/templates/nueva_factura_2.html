@@ -1,0 +1,120 @@
+<h1>Nueva Factura</h1>
+
+<form ng-submit="ctrl.addFactura(ctrl.factura, ctrl.factura_productos)">
+<!--    <div class="form-group">
+        <label for="facturador">Facturador</label>
+        <select id="facturador" class="form-control" ng-model="ctrl.factura.id_facturador">
+            <option value="">Seleccionar...</option>
+            <option ng-repeat="facturador in ctrl.facturadores" value="{{facturador.id_facturador}}">{{facturador.nombre}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="cliente">Cliente</label>
+        <select id="cliente" class="form-control" ng-model="ctrl.factura.id_cliente">
+            <option value="">Seleccionar...</option>
+            <option ng-repeat="cliente in ctrl.clientes" value="{{cliente.id_cliente}}">{{cliente.nombre}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input type="text" id="fecha" class="form-control" placeholder="aaa-mm-dd" ng-model="ctrl.factura.fecha" >
+    </div>-->
+
+
+    <!--    <div class="form-group" ng-repeat="pf in ctrl.factura.productos">
+            <div class="input-group">
+                <select class="form-control" ng-model="pf.id_producto">
+                    <option value="0">Seleccionar Producto...</option>
+                    <option ng-repeat="producto in ctrl.productos" value="{{producto.id_producto}}">{{producto.descripcion}}</option>
+                </select>
+                <span class="input-group-btn">
+                    <button type="button" ng-show="$last" ng-click="ctrl.addProducto()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                    <button type="button" ng-show="ctrl.factura.productos.length > 1" ng-click="ctrl.delProducto(pf)" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>
+                </span>
+            </div>
+        </div> -->
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cantidad</th>
+                <th>Producto</th>
+                <th>Impuesto</th>
+                <th>%</th>
+                <th>Precio</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr ng-repeat="pf in ctrl.factura_productos">
+                <td>
+                    <input type="number" class="form-control" ng-model="pf.cantidad">
+                </td>
+                <td>
+                    <select class="form-control" ng-change="ctrl.validar(pf.producto)"
+                            ng-options="producto.descripcion for producto in ctrl.productos" ng-model="pf.producto">
+                        <option value="">Seleccionar Producto...</option>                       
+                    </select>
+                </td>
+<!--                <td>
+                    <select class="form-control" ng-model="pf.producto.id_impuesto">
+                        <option value="">Seleccionar Impuesto...</option>
+                        <option ng-repeat="impuesto in ctrl.impuestos" value="{{impuesto.id_impuesto}}">{{impuesto.descripcion}}</option>
+                    </select>
+                </td>-->
+                 <td>
+                     <select class="form-control" ng-model="::pf.producto.impuesto" 
+                            ng-options="impuesto as impuesto.descripcion for impuesto in ctrl.impuestos track by impuesto.id_impuesto">
+                        <option value="">Seleccionar...</option>                       
+                    </select>
+                </td>
+                <td>
+                    <input type="text" class="form-control" ng-model="pf.producto.impuesto.tasa" readonly>
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Precio" ng-model="pf.producto.precio_unitario">
+                </td>
+                <td>
+                    <button type="button" ng-disabled="ctrl.factura_productos.length == 1" ng-click="ctrl.delProducto(pf)" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>
+                </td>
+                <td>
+                    <button type="button" ng-show="$last" ng-click="ctrl.addProducto()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="form-group">
+        <select class="form-control" ng-model="ctrl.factura.id_preferencia">
+            <option value="">Seleccionar Prefencia...</option>
+            <option ng-repeat="p in ctrl.preferencias" value="{{p.id_preferencia}}">{{p.descripcion}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="notas">Nota</label>
+        <textarea  id="notas" class="form-control" placeholder="" ng-model="ctrl.factura.nota" />
+    </div>
+
+
+
+    <button type="submit" class="btn btn-default">Guardar</button>
+</form>
+<div>Factura:{{ctrl.factura|json}}</div>
+<div>Productos:{{ctrl.factura_productos|json}}</div>
+
+<script>
+    $('#fecha').datepicker({
+        todayBtn: "linked",
+        language: "es",
+        orientation: "bottom auto",
+        todayHighlight: true,
+        format: "yyyy-mm-dd",
+        autoclose: true
+    });
+</script>

@@ -1,0 +1,33 @@
+<h1>Facturas</h1>
+
+<table st-table="ctrl.facturas_view" st-safe-src="ctrl.facturas" class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th st-sort="facturador">FACTURADOR</th>
+            <th st-sort="cliente">CLIENTE</th>
+            <th>TIPO</th>
+            <th st-sort="fecha">FECHA</th>
+            <th>DOMINIO</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="factura in ctrl.facturas_view">
+            <td>{{factura.id_factura}}</td>
+            <td>{{factura.facturador}}</td>
+            <td>{{factura.cliente}}</td>
+            <td>{{factura.factura_tipo}}</td>
+            <td>{{factura.fecha}}</td>
+            <td>{{factura.dominio}}</td>
+            <td>
+                <div class="btn-group-sm">
+                    <button class="btn btn-default" ng-click="ctrl.verFactura(factura)"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-default" ng-click="ctrl.editarFactura(factura)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <button class="btn btn-default" ng-click="ctrl.pdfFactura(factura)"><i class="glyphicon glyphicon-file"></i></button>
+                    <button class="btn btn-default" ng-click="ctrl.enviarFactura(factura)"><i class="glyphicon glyphicon-envelope"></i></button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
