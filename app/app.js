@@ -5,7 +5,7 @@ underscore.factory('_', ['$window', function ($window) {
     }]);
 var app = angular.module('FacturasApp', ['ui.router', 'smart-table', 'underscore', 'myApp.version']);
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/login');
         $stateProvider
                 .state('home', {
                     url: '/'
@@ -90,6 +90,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 .state('reporte_ventas', {
                     url: '/reporte_ventas',
                     templateUrl: 'templates/reporte_ventas.html'
+                })
+                 .state('login', {
+                    url: '/login',
+                    templateUrl: 'templates/login.html',
+                    controller:'LoginCtrl as ctrl'
                 })
                 .state('clientes', {
                     url: '/clientes',
