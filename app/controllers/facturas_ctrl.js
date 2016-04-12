@@ -4,6 +4,8 @@ angular.module('FacturasApp').controller('FacturasCtrl', ['$state', 'FacturasApi
 
         FacturasApi.get_facturas().then(function (response) {
             self.facturas = response.data;
+            //console.log("facturas");
+            //console.log(response);
         });
 
         self.verFactura = function (factura) {

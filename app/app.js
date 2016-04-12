@@ -3,8 +3,12 @@ var underscore = angular.module('underscore', []);
 underscore.factory('_', ['$window', function ($window) {
         return $window._;
     }]);
-var app = angular.module('FacturasApp', ['ui.router', 'smart-table', 'underscore', 'myApp.version']);
-app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+var app = angular.module('FacturasApp', ['ui.router', 'smart-table', 'underscore', 'myApp.version', 'satellizer']);
+app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpProvider',
+    function ($stateProvider, $urlRouterProvider, $authProvider,$httpProvider) {
+        
+        $authProvider.baseUrl = "http://localhost:8000/test_rest/index.php"; 
+      
         $urlRouterProvider.otherwise('/login');
         $stateProvider
                 .state('home', {
@@ -86,15 +90,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     templateUrl: 'templates/usuarios.html',
                     controller: "UsuariosCtrl as ctrl"
                 })
-
                 .state('reporte_ventas', {
                     url: '/reporte_ventas',
                     templateUrl: 'templates/reporte_ventas.html'
                 })
-                 .state('login', {
+                .state('login', {
                     url: '/login',
                     templateUrl: 'templates/login.html',
-                    controller:'LoginCtrl as ctrl'
+                    controller: 'LoginCtrl as ctrl'
+                })
+                .state('logout', {
+                    url: '/logout',
+                    //templateUrl: 'templates/login.html',
+                    controller: 'LogoutCtrl as ctrl'
                 })
                 .state('clientes', {
                     url: '/clientes',
@@ -102,7 +110,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     controller: "ClientesCtrl as ctrl"
                 });
     }]);
-app.controller('AppCtrl', [function () {
+app.controller('AppCtrl', ['$auth', function ($auth) {
+        var self = this;
 
     }]);
 
