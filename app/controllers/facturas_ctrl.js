@@ -6,11 +6,19 @@ angular.module('FacturasApp').controller('FacturasCtrl', ['$state', 'FacturasApi
             self.facturas = response.data;
             //console.log("facturas");
             //console.log(response);
+        }).catch(function (response) {
+            console.log(response.data.error.message);
+            //response.status 500
+            //response.statusText Internal Server Error
+//            if (response.status == 401) {
+//                $state.go('login');
+//            }
+
         });
 
         self.verFactura = function (factura) {
             console.log("ver factura " + factura.id_factura);
-            $state.go('facturas.vistarapida' ,{id_factura: factura.id_factura});
+            $state.go('facturas.vistarapida', {id_factura: factura.id_factura});
 
         };
         self.enviarFactura = function (factura) {
@@ -21,7 +29,7 @@ angular.module('FacturasApp').controller('FacturasCtrl', ['$state', 'FacturasApi
         };
         self.editarFactura = function (factura) {
             console.log("editar factura " + factura.id_factura);
-             $state.go('facturas.editar' ,{id_factura: factura.id_factura});
+            $state.go('facturas.editar', {id_factura: factura.id_factura});
         };
         self.pdfFactura = function (factura) {
             console.log("pdf factura " + factura.id_factura);

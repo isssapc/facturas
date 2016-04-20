@@ -1,6 +1,6 @@
 angular.module('FacturasApp')
         .factory('FacturasApi', ['$http', function FacturasApiFactory($http) {
-                var url = 'http://localhost:8000/test_rest/index.php/';// 'http://192.168.1.81:8000/test_rest/index.php/';
+                var url = 'http://localhost:8000/facturacion_api/index.php/';// 'http://192.168.1.81:8000/test_rest/index.php/';
 
                 return {
                     get_usuarios: function () {

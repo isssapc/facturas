@@ -4,11 +4,35 @@ underscore.factory('_', ['$window', function ($window) {
         return $window._;
     }]);
 var app = angular.module('FacturasApp', ['ui.router', 'smart-table', 'underscore', 'myApp.version', 'satellizer']);
-app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpProvider',
-    function ($stateProvider, $urlRouterProvider, $authProvider,$httpProvider) {
-        
-        $authProvider.baseUrl = "http://localhost:8000/test_rest/index.php"; 
-      
+
+app.run(function ($rootScope, $state, $auth) {
+
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+//        console.log("event", event);
+//        console.log("toState", toState);
+//        console.log("fromState", fromState);
+//        console.log("toParams", toParams);
+//        console.log("fromParams", fromParams);
+//        console.log("options", options);
+        if (toState.name !== 'login' && !$auth.isAuthenticated()) {
+            event.preventDefault();
+            console.log("------------------------------------------------------------------");
+            console.log("No está autenticado. Prevenimos la navegacion a: " + toState.name);
+            console.log("------------------------------------------------------------------");
+            if (fromState.name !== 'login') {
+                $state.go('login');
+            }
+        }
+    });
+
+});
+
+app.config(['$stateProvider', '$urlRouterProvider', '$authProvider',
+    function ($stateProvider, $urlRouterProvider, $authProvider) {
+
+        $authProvider.baseUrl = "http://localhost:8000/facturacion_api/index.php";
+        $authProvider.tokenPrefix = 'facturacion';
+
         $urlRouterProvider.otherwise('/login');
         $stateProvider
                 .state('home', {
@@ -98,18 +122,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpProvi
                     url: '/login',
                     templateUrl: 'templates/login.html',
                     controller: 'LoginCtrl as ctrl'
+
                 })
                 .state('logout', {
                     url: '/logout',
-                    //templateUrl: 'templates/login.html',
                     controller: 'LogoutCtrl as ctrl'
                 })
                 .state('clientes', {
                     url: '/clientes',
                     templateUrl: 'templates/clientes.html',
-                    controller: "ClientesCtrl as ctrl"
+                    controller: "ClientesCtrl as ctrl",
+                    resolve: {
+                        clientes: function (FacturasApi) {
+                            return FacturasApi.get_clientes();
+                        }
+                    }
                 });
     }]);
+
 app.controller('AppCtrl', ['$auth', function ($auth) {
         var self = this;
 
